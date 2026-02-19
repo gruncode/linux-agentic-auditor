@@ -60,7 +60,7 @@ Start Claude Code and paste the contents of `prompts/ensemble-auditor-v3.md`:
 ```bash
 claude
 # Then paste the prompt content, or:
-cat prompts/ensemble-auditor-v3.md | claude -p --permission-mode bypassPermissions
+cat prompts/ensemble-auditor-v3.md | claude -p --dangerously-skip-permissions
 ```
 
 Output goes to `~/audits/YYYY-MM-DD/`.
@@ -85,7 +85,6 @@ All configuration is via environment variables (set in `mcp.json` or your shell)
 ```
 claude-audit-pipeline/
 ├── README.md                          # This file
-├── LICENSE                            # MIT
 ├── mcp-spawn-agent/
 │   ├── server.py                      # MCP server — spawns claude -p subprocesses
 │   └── requirements.txt              # Python deps
@@ -147,6 +146,3 @@ The spawn-agent server is a Python [MCP](https://modelcontextprotocol.io/) serve
 
 See [docs/architecture.md](docs/architecture.md) for the full architecture diagram.
 
-## License
-
-MIT — see [LICENSE](LICENSE).
