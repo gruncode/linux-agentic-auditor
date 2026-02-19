@@ -1,0 +1,42 @@
+{
+  "audit_dir": "~/audits/2026-01-15/",
+  "started": "2026-01-15T14:30:00Z",
+  "completed": "2026-01-15T16:45:00Z",
+  "target": "Ubuntu 24.04 LTS (webserver-prod-01)",
+  "phases": {
+    "phase1": {
+      "status": "completed",
+      "workers": 16,
+      "evaluators": 8,
+      "duration_seconds": 4200
+    },
+    "phase2": {
+      "status": "completed",
+      "findings_must_verify": 42,
+      "findings_parked": 18,
+      "regression_check": "no previous audit found"
+    },
+    "phase3": {
+      "status": "completed",
+      "strong_verifiers": 28,
+      "duration_seconds": 1800
+    },
+    "phase3_5": {
+      "status": "completed",
+      "triage_agents": 5,
+      "duration_seconds": 900
+    },
+    "report": {
+      "status": "completed"
+    }
+  },
+  "summary": {
+    "critical": 2,
+    "high": 8,
+    "medium": 15,
+    "low": 12,
+    "false_positive": 5,
+    "total_agents_spawned": 57,
+    "total_elapsed_minutes": 135
+  }
+}

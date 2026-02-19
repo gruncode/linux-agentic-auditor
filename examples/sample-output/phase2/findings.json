@@ -1,0 +1,53 @@
+{
+  "findings": [
+    {
+      "id": "FND-001",
+      "title": "SSH root login enabled with password authentication",
+      "description": "PermitRootLogin is set to 'yes' and PasswordAuthentication is 'yes' in sshd_config. Combined with SSH listening on default port 22 on all interfaces, this creates an active brute-force attack surface.",
+      "domain": "03-network",
+      "signal": "STRONG",
+      "flagged_by": "both",
+      "verify": "MUST",
+      "evidence_facts": ["ssh_config_root_login", "ssh_listening_port", "password_auth_enabled"],
+      "evidence_raw": ["phase1/03-network-sonnet/raw/sshd-config.txt", "phase1/03-network-opus/raw/ss-listen.txt"]
+    },
+    {
+      "id": "FND-002",
+      "title": "52 pending security updates including kernel CVEs",
+      "description": "apt list --upgradable shows 52 packages with security updates pending. Includes linux-image with 3 known CVEs (privilege escalation). unattended-upgrades is not installed.",
+      "domain": "06-software",
+      "signal": "STRONG",
+      "flagged_by": "both",
+      "verify": "MUST",
+      "evidence_facts": ["pending_security_updates", "unattended_upgrades_missing", "kernel_cve_list"],
+      "evidence_raw": ["phase1/06-software-sonnet/raw/apt-upgradable.txt", "phase1/06-software-opus/raw/apt-security.txt"]
+    },
+    {
+      "id": "FND-003",
+      "title": "No OOM protection on production server",
+      "description": "Neither earlyoom nor systemd-oomd is installed or configured. Server has 32GB RAM with no swap. Under memory pressure, the kernel OOM killer will terminate processes unpredictably.",
+      "domain": "01-processes",
+      "signal": "STRONG",
+      "flagged_by": "evaluator",
+      "verify": "MUST",
+      "evidence_facts": ["oom_config", "memory_usage", "swap_status"],
+      "evidence_raw": ["phase1/01-processes-sonnet/raw/sysctl-vm.txt", "phase1/01-processes-opus/raw/meminfo.txt"]
+    }
+  ],
+  "parked": [
+    {
+      "id": "PARK-001",
+      "title": "3 zombie processes under nginx",
+      "description": "3 zombie processes parented by nginx worker PIDs",
+      "domain": "01-processes",
+      "reason_parked": "WEAK signal from single model (sonnet only), not reinforced by evaluator"
+    },
+    {
+      "id": "PARK-002",
+      "title": "Node.js process at sustained 45% CPU",
+      "description": "PID 8821 running node at 45% CPU — may be normal workload",
+      "domain": "01-processes",
+      "reason_parked": "WEAK signal from single model, likely normal application behavior"
+    }
+  ]
+}

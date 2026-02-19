@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mcp-spawn-agent": {
+      "command": "python3",
+      "args": ["/path/to/claude-audit-pipeline/mcp-spawn-agent/server.py"],
+      "env": {
+        "SPAWN_MAX_PARALLEL": "3",
+        "SPAWN_MAX_DEPTH": "3",
+        "SPAWN_AGENT_TIMEOUT": "900",
+        "SPAWN_DEFAULT_MODEL": "opus"
+      }
+    }
+  }
+}

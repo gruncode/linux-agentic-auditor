@@ -1,0 +1,48 @@
+{
+  "domain": "01-processes",
+  "model": "sonnet",
+  "facts": [
+    {
+      "topic": "total_processes",
+      "value": "287 processes running",
+      "raw_file": "raw/ps-aux.txt"
+    },
+    {
+      "topic": "memory_usage",
+      "value": "12.4GB of 32GB used (38.7%), 0 swap used",
+      "raw_file": "raw/meminfo.txt"
+    },
+    {
+      "topic": "oom_config",
+      "value": "vm.overcommit_memory=0, vm.panic_on_oom=0, no earlyoom installed",
+      "raw_file": "raw/sysctl-vm.txt"
+    },
+    {
+      "topic": "zombie_processes",
+      "value": "3 zombie processes: [defunct] PID 14523, 14524, 14530 (parent: nginx worker)",
+      "raw_file": "raw/ps-zombie.txt"
+    },
+    {
+      "topic": "high_cpu_processes",
+      "value": "node (PID 8821) at 45% CPU sustained, postgres (PID 1203) at 12%",
+      "raw_file": "raw/top-snapshot.txt"
+    }
+  ],
+  "candidates": [
+    {
+      "topic": "zombie_processes",
+      "signal": "WEAK",
+      "observation": "3 zombie processes parented by nginx worker — may indicate improper child reaping"
+    },
+    {
+      "topic": "oom_config",
+      "signal": "STRONG",
+      "observation": "No OOM protection (earlyoom/systemd-oomd) installed on a production server with 32GB RAM"
+    },
+    {
+      "topic": "high_cpu_processes",
+      "signal": "WEAK",
+      "observation": "Node.js process sustaining 45% CPU — could be normal for workload or indicate a runaway process"
+    }
+  ]
+}
