@@ -23,7 +23,7 @@ See [docs/architecture.md](docs/architecture.md) for detailed diagrams and desig
 ## Prerequisites
 
 - **Claude Code** — Anthropic's CLI tool ([install guide](https://docs.anthropic.com/en/docs/claude-code))
-- **Claude Pro or Max subscription** — Required for `claude -p` subprocess spawning
+- **Claude Code** — with API key or Pro/Max subscription (subscription avoids per-token costs for 50+ agents)
 - **Python 3.11+**
 - **pip** — For installing the MCP dependency
 - **sudo access** on the target machine (the audit agents need to read system state)
